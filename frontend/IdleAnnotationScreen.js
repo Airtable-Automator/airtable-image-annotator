@@ -17,12 +17,12 @@ import getListOfNamesWithPictures from './getListOfNamesWithPictures';
  * This screen is re-used by the game completed screen and home screen which share the same layout and
  * functionality, but have different content.
  */
-export default function IdleGameScreen({
+export default function IdleAnnotationScreen({
     emoji,
     title,
     text,
     buttonLabel,
-    onStartGame,
+    onStartAnnotation,
     onShowSettings,
 }) {
     // We are watching the settings here to make sure the settings are still valid for a new game.
@@ -54,7 +54,7 @@ export default function IdleGameScreen({
         callToActions = (
             <React.Fragment>
                 <Button
-                    onClick={() => onStartGame(listOfNamesWithPictures)}
+                    onClick={() => onStartAnnotation(listOfNamesWithPictures)}
                     icon="play"
                     size="large"
                     variant="primary"
@@ -99,11 +99,11 @@ export default function IdleGameScreen({
     );
 }
 
-IdleGameScreen.propTypes = {
+IdleAnnotationScreen.propTypes = {
     emoji: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     buttonLabel: PropTypes.string.isRequired,
-    onStartGame: PropTypes.func.isRequired,
+    OnStartAnnotation: PropTypes.func.isRequired,
     onShowSettings: PropTypes.func.isRequired,
 };

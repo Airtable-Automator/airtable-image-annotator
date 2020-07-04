@@ -72,7 +72,7 @@ function NameQuizBlock() {
      *
      * @param {Array<{recordId: string, name: string, largePictureUrl: string, smallPictureUrl: string}>} listOfNamesWithPictures
      */
-    function startGame(listOfNamesWithPictures) {
+    function startAnnotation(listOfNamesWithPictures) {
         // Enter the block in fullscreen to have more real estate to play the game.
         viewport.enterFullscreenIfPossible();
         setGameData({
@@ -117,12 +117,12 @@ function NameQuizBlock() {
                 />
             );
         case GameStates.HOME_SCREEN:
-            return <HomeScreen onStartGame={startGame} onShowSettings={showSettings} />;
+            return <HomeScreen onStartAnnotation={startAnnotation} onShowSettings={showSettings} />;
         case GameStates.GAME_COMPLETED:
             return (
                 <GameCompletedScreen
                     gameReport={gameReport}
-                    onStartGame={startGame}
+                    onStartAnnotation={startAnnotation}
                     onShowSettings={showSettings}
                 />
             );

@@ -1,25 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import IdleGameScreen from './IdleGameScreen';
+import IdleAnnotationScreen from './IdleAnnotationScreen';
 
 /**
  * The HomeScreen is shown when the settings are valid and the player can start the game.
  */
-export default function HomeScreen({onStartGame, onShowSettings}) {
+export default function HomeScreen({onStartAnnotation, onShowSettings}) {
     return (
-        <IdleGameScreen
+        <IdleAnnotationScreen
             emoji="👁 👁"
-            title="How many people do you recognize?"
-            text="Each round will show you a name and multiple pictures, select the picture that matches!"
-            buttonLabel="Start game"
-            onStartGame={onStartGame}
+            title="Welcome to the Image Annotation block"
+            text="Each task will show you an image, select the annotation/label that corresponds to the image!"
+            buttonLabel="Start Annotation"
+            onStartAnnotation={onStartAnnotation}
             onShowSettings={onShowSettings}
         />
     );
 }
 
 HomeScreen.propTypes = {
-    onStartGame: PropTypes.func.isRequired,
+    onStartAnnotation: PropTypes.func.isRequired,
     onShowSettings: PropTypes.func.isRequired,
 };

@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import IdleGameScreen from './IdleGameScreen';
+import IdleAnnotationScreen from './IdleAnnotationScreen';
 
 /**
  * The GameCompletedScreen is shown when the user wins or loses the game.
  */
-export default function GameCompletedScreen({gameReport, onStartGame, onShowSettings}) {
+export default function GameCompletedScreen({gameReport, onStartAnnotation, onShowSettings}) {
     const didUserWinTheGame = gameReport.numCompleted === gameReport.numTotal;
     return (
-        <IdleGameScreen
+        <IdleAnnotationScreen
             emoji={didUserWinTheGame ? '🏆' : '💀'}
             title={didUserWinTheGame ? '🎉 Game completed! 🎉' : '🙁 Game over! 🙁'}
             text={
@@ -18,7 +18,7 @@ export default function GameCompletedScreen({gameReport, onStartGame, onShowSett
                     : `You recognized ${gameReport.numCompleted} out of ${gameReport.numTotal} people`
             }
             buttonLabel={didUserWinTheGame ? 'Go again' : 'Try again'}
-            onStartGame={onStartGame}
+            onStartAnnotation={onStartAnnotation}
             onShowSettings={onShowSettings}
         />
     );
@@ -29,6 +29,6 @@ GameCompletedScreen.propTypes = {
         numCompleted: PropTypes.number.isRequired,
         numTotal: PropTypes.number.isRequired,
     }).isRequired,
-    onStartGame: PropTypes.func.isRequired,
+    onStartAnnotation: PropTypes.func.isRequired,
     onShowSettings: PropTypes.func.isRequired,
 };
