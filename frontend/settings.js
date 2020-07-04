@@ -5,8 +5,6 @@ import {FieldType} from '@airtable/blocks/models';
 
 // Constants that determine when more pictures are shown in the game.
 export const MIN_AMOUNT_OF_PICTURES = 2;
-export const MAX_AMOUNT_OF_PICTURES = 4;
-export const COMPLETED_NAMES_BEFORE_MAX_AMOUNT_OF_PICTURES = 10;
 
 /**
  * The keys that will be used to store fields in global config.

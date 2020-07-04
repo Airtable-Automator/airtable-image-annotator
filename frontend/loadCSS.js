@@ -33,14 +33,10 @@ const cssString = `
         max-width: 512px;
     }
 
-    .PictureGrid-2-options {
-        padding-bottom: 20vh;
-        align-items: center;
-    }
-
+    
     .PictureGrid-2-options .Picture {
-        width: calc(50% - 16px);
-        height: calc(100% - 16px);
+        width: calc(100% - 0px);
+        height: calc(100% - 0px);
     }
 
     .PictureGrid-4-options {

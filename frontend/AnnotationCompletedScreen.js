@@ -25,7 +25,7 @@ export default function GameCompletedScreen({gameReport, onStartAnnotation, onSh
 }
 
 GameCompletedScreen.propTypes = {
-    gameReport: PropTypes.shape({
+    annotationReport: PropTypes.shape({
         numCompleted: PropTypes.number.isRequired,
         numTotal: PropTypes.number.isRequired,
     }).isRequired,

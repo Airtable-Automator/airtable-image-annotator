@@ -4,8 +4,8 @@ import {initializeBlock} from '@airtable/blocks/ui';
 
 import SettingsForm from './SettingsForm';
 import HomeScreen from './HomeScreen';
-import GameCompletedScreen from './GameCompletedScreen';
-import Game from './Game';
+import AnnotationCompletedScreen from './AnnotationCompletedScreen';
+import Annotation from './Annotation';
 import loadCSS from './loadCSS';
 
 // Load all the CSS used in our block.
@@ -26,7 +26,7 @@ viewport.addMaxFullscreenSize({
 /**
  * The game state determines what screen to render.
  */
-const GameStates = Object.freeze({
+const AnnotationStates = Object.freeze({
     /**
      * The player is configuring settings to be able to play the game.
      * If the game is configured, other users will see the home screen instead.
@@ -46,7 +46,7 @@ const GameStates = Object.freeze({
      * The player completed the game, they either picked all correctly and won the game, or failed.
      * They can go again or update the settings.
      */
-    GAME_COMPLETED: 'gameCompleted',
+    ANNOTATION_COMPLETED: 'gameCompleted',
 });
 
 /**
@@ -55,17 +55,17 @@ const GameStates = Object.freeze({
  *
  * This component handles all of the game lifecycle and renders a component based on the state of the game.
  */
-function NameQuizBlock() {
-    const [gameData, setGameData] = useState({
+function ImageAnnotationBlock() {
+    const [annotationData, setAnnotationData] = useState({
         // On first run of the block show the settings screen.
-        gameState: runInfo.isFirstRun ? GameStates.CONFIGURING_SETTINGS : GameStates.HOME_SCREEN,
+        annotationState: runInfo.isFirstRun ? AnnotationStates.CONFIGURING_SETTINGS : AnnotationStates.HOME_SCREEN,
         // The game report will be populated when a game ends. It is used by the `GameCompletedScreen`.
-        gameReport: null,
+        annotationReport: null,
         // The list of names with pictures the game will use.
         listOfNamesWithPictures: null,
     });
 
-    const {gameState, gameReport, listOfNamesWithPictures} = gameData;
+    const {annotationState, annotationReport, listOfNamesWithPictures} = annotationData;
 
     /**
      * Start the game with a list of names with pictures.
@@ -73,62 +73,62 @@ function NameQuizBlock() {
      * @param {Array<{recordId: string, name: string, largePictureUrl: string, smallPictureUrl: string}>} listOfNamesWithPictures
      */
     function startAnnotation(listOfNamesWithPictures) {
-        // Enter the block in fullscreen to have more real estate to play the game.
+        // Enter the block in fullscreen to have more real estate for annotation.
         viewport.enterFullscreenIfPossible();
-        setGameData({
-            gameState: GameStates.PLAYING,
-            gameReport: null,
+        setAnnotationData({
+            annotationState: AnnotationStates.PLAYING,
+            annotationReport: null,
             listOfNamesWithPictures,
         });
     }
 
-    function gameCompleted(newGameReport) {
-        setGameData({
-            gameState: GameStates.GAME_COMPLETED,
-            gameReport: newGameReport,
+    function annotationCompleted(newAnnotationReport) {
+        setAnnotationData({
+            annotationState: AnnotationStates.ANNOTATION_COMPLETED,
+            annotationReport: newAnnotationReport,
             listOfNamesWithPictures: null,
         });
     }
 
     function showSettings() {
-        setGameData({
-            gameState: GameStates.CONFIGURING_SETTINGS,
-            gameReport: null,
+        setAnnotationData({
+            annotationState: AnnotationStates.CONFIGURING_SETTINGS,
+            annotationReport: null,
             listOfNamesWithPictures: null,
         });
     }
 
     function showHomeScreen() {
-        setGameData({
-            gameState: GameStates.HOME_SCREEN,
-            gameReport: null,
+        setAnnotationData({
+            annotationState: AnnotationStates.HOME_SCREEN,
+            annotationReport: null,
             listOfNamesWithPictures: null,
         });
     }
 
-    switch (gameState) {
-        case GameStates.CONFIGURING_SETTINGS:
+    switch (annotationState) {
+        case AnnotationStates.CONFIGURING_SETTINGS:
             return <SettingsForm onDone={showHomeScreen} />;
-        case GameStates.PLAYING:
+        case AnnotationStates.PLAYING:
             return (
-                <Game
+                <Annotation
                     listOfNamesWithPictures={listOfNamesWithPictures}
-                    onComplete={gameCompleted}
+                    onComplete={annotationCompleted}
                 />
             );
-        case GameStates.HOME_SCREEN:
+        case AnnotationStates.HOME_SCREEN:
             return <HomeScreen onStartAnnotation={startAnnotation} onShowSettings={showSettings} />;
-        case GameStates.GAME_COMPLETED:
+        case AnnotationStates.ANNOTATION_COMPLETED:
             return (
-                <GameCompletedScreen
-                    gameReport={gameReport}
+                <AnnotationCompletedScreen
+                    annotationReport={annotationReport}
                     onStartAnnotation={startAnnotation}
                     onShowSettings={showSettings}
                 />
             );
         default:
-            throw new Error('Unexpected game state: ', gameState);
+            throw new Error('Unexpected state: ', annotationState);
     }
 }
 
-initializeBlock(() => <NameQuizBlock />);
+initializeBlock(() => <ImageAnnotationBlock />);

@@ -104,6 +104,6 @@ IdleAnnotationScreen.propTypes = {
     title: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     buttonLabel: PropTypes.string.isRequired,
-    OnStartAnnotation: PropTypes.func.isRequired,
+    onStartAnnotation: PropTypes.func.isRequired,
     onShowSettings: PropTypes.func.isRequired,
 };

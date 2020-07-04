@@ -10,8 +10,8 @@ export default function HomeScreen({onStartAnnotation, onShowSettings}) {
     return (
         <IdleAnnotationScreen
             emoji="👁 👁"
-            title="Welcome to the Image Annotation block"
-            text="Each task will show you an image, select the annotation/label that corresponds to the image!"
+            title="Welcome to the Image Annotation Block"
+            text="When you start annotation, a task will be presented. Each task will show you an image, select the annotation/label that corresponds to the image!"
             buttonLabel="Start Annotation"
             onStartAnnotation={onStartAnnotation}
             onShowSettings={onShowSettings}
