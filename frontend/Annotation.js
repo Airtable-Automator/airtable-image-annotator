@@ -4,6 +4,7 @@ import _ from 'lodash';
 
 import AnnotationTask from './AnnotationTask';
 import FullScreenBox from './FullScreenBox';
+import {useSettings, ConfigKeys} from './settings';
 
 /**
  * The Annotation component is responsible for the annotation lifecycle.
@@ -11,18 +12,30 @@ import FullScreenBox from './FullScreenBox';
 export default function Annotation({listOfNamesWithPictures, onComplete}) {
     const [completed, setCompleted] = useState([]);
 
-     // The user picked the right option! Go to the next round or end the game.
+    const {isValid, settings, message} = useSettings();
+
+    function updateAnnotationField(record) {
+        settings.table.updateRecordAsync(
+            record.recordId, {[settings.annotationField.id]: {name : "Cat"}} 
+        );  
+    };
+    
+    
+    
+    // Go to the next task.
     function nextTask(currentRecord) {
         const newCompleted = [...completed, currentRecord];
+        
+        updateAnnotationField(currentRecord);
 
         if (newCompleted.length === listOfNamesWithPictures.length) {
-            // The game is won! All names are correctly picked.
+            // All annotations are complete.
             onComplete({
                 numTotal: listOfNamesWithPictures.length,
                 numCompleted: newCompleted.length,
             });
         } else {
-            // The game is not won yet, the next round will now be shown.
+            // There are more annotatins. Next annotation task will be shown.
             setCompleted(newCompleted);
         }
     }
