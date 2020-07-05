@@ -23,7 +23,7 @@ const TaskCompletionStates = Object.freeze({
  * The GameRound component is responsible for showing the options and allowing the player to select an option.
  * It also keeps track of time, when the user fails to pick an option within the time, it's a fail.
  */
-export default function GameRound({
+export default function AnnotationTask({
     currentRecord,
     currentRecordName,
     numTotal,
@@ -31,7 +31,7 @@ export default function GameRound({
     roundTimeMs,
     onSuccess,
 }) {
-    const {isValid, settings, message} = useSettings();
+    const settings = useSettings().settings;
     const [roundState, setRoundState] = useState(TaskCompletionStates.IDLE);
     const isRoundComplete = [TaskCompletionStates.SUCCESS, TaskCompletionStates.SKIP].includes(roundState);
 
@@ -42,13 +42,13 @@ export default function GameRound({
         switch (roundState) {
             case TaskCompletionStates.SUCCESS: {
                 timeoutId = setTimeout(() => {
-                    onSuccess();
+                    onSuccess(annotationValue, false);
                 }, 1000);
                 break;
             }
             case TaskCompletionStates.SKIP: {
                 timeoutId = setTimeout(() => {
-                    onSuccess();
+                    onSuccess(annotationValue, true);
                 }, 1000);
                 break;
             }
@@ -154,7 +154,7 @@ export default function GameRound({
     );
 }
 
-GameRound.propTypes = {
+AnnotationTask.propTypes = {
     currentRecordName: PropTypes.string.isRequired,
     currentRecord: PropTypes.arrayOf(
         PropTypes.shape({

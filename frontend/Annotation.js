@@ -12,21 +12,22 @@ import {useSettings, ConfigKeys} from './settings';
 export default function Annotation({listOfNamesWithPictures, onComplete}) {
     const [completed, setCompleted] = useState([]);
 
-    const {isValid, settings, message} = useSettings();
+    const settings = useSettings().settings;
 
-    function updateAnnotationField(record) {
+    function updateAnnotationField(record, label) {
         settings.table.updateRecordAsync(
-            record.recordId, {[settings.annotationField.id]: {name : "Cat"}} 
+            record.recordId, {[settings.annotationField.id]: {name : label}} 
         );  
     };
     
     
     
     // Go to the next task.
-    function nextTask(currentRecord) {
+    function nextTask(currentRecord, label, skipRecord) {
         const newCompleted = [...completed, currentRecord];
-        
-        updateAnnotationField(currentRecord);
+        if(!skipRecord) {
+            updateAnnotationField(currentRecord, label);
+        }
 
         if (newCompleted.length === listOfNamesWithPictures.length) {
             // All annotations are complete.
@@ -59,7 +60,7 @@ export default function Annotation({listOfNamesWithPictures, onComplete}) {
                 roundTimeMs={roundTimeMs}
                 numCompleted={completed.length}
                 numTotal={listOfNamesWithPictures.length}
-                onSuccess={() => nextTask(currentRecord)}
+                onSuccess={(label, skipRecord) => nextTask(currentRecord, label, skipRecord)}
             />
         </FullScreenBox>
     );
