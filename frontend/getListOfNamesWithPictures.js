@@ -6,7 +6,7 @@
  * @param {Field} param.nameField - The name field.
  * @return {Array<{recordId: string, name: string, largePictureUrl: string, smallPictureUrl: string}>} - A list of names with pictures.
  */
-export default function getListOfNamesWithPictures({records, attachmentField, nameField}) {
+export default function getListOfNamesWithPictures({records, attachmentField, annotationField}) {
     const listOfNamesWithPictures = [];
 
     for (const record of records) {
@@ -28,10 +28,10 @@ export default function getListOfNamesWithPictures({records, attachmentField, na
             continue;
         }
 
-        const name = record.getCellValueAsString(nameField);
+        const name = record.getCellValueAsString(annotationField);
 
-        if (name.trim() === '') {
-            // If there is no useful name, continue without it.
+        if (name.trim() !== '') {
+            // If the label already exists, continue
             continue;
         }
 

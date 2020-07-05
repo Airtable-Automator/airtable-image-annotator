@@ -6,10 +6,7 @@ export default function Picture({
     smallPictureUrl,
 }) {
     const classNames = ['Picture'];
-    // classNames.push('Picture-isRoundComplete');
-    // classNames.push('Picture-winner');
-    // classNames.push('Picture-pickedSucessfully')    
-    return (
+   return (
         <div
             className={classNames.join(' ')}
             style={{

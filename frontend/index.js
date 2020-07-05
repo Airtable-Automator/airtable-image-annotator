@@ -41,7 +41,7 @@ const AnnotationStates = Object.freeze({
      * The player is playing the game, any update in settings or any update to settings,
      * the records or the base, will not interrupt the game.
      */
-    PLAYING: 'playing',
+    ANNOTATING: 'annotating',
     /**
      * The player completed the game, they either picked all correctly and won the game, or failed.
      * They can go again or update the settings.
@@ -76,7 +76,7 @@ function ImageAnnotationBlock() {
         // Enter the block in fullscreen to have more real estate for annotation.
         viewport.enterFullscreenIfPossible();
         setAnnotationData({
-            annotationState: AnnotationStates.PLAYING,
+            annotationState: AnnotationStates.ANNOTATING,
             annotationReport: null,
             listOfNamesWithPictures,
         });
@@ -109,7 +109,7 @@ function ImageAnnotationBlock() {
     switch (annotationState) {
         case AnnotationStates.CONFIGURING_SETTINGS:
             return <SettingsForm onDone={showHomeScreen} />;
-        case AnnotationStates.PLAYING:
+        case AnnotationStates.ANNOTATING:
             return (
                 <Annotation
                     listOfNamesWithPictures={listOfNamesWithPictures}

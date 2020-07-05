@@ -5,6 +5,8 @@ import {Text, Box, Heading, Button, SelectButtons} from '@airtable/blocks/ui';
 
 import Picture from './Picture';
 
+import {useSettings, ConfigKeys} from './settings';
+
 /**
  * The task completion state describes the state of the task.
  */
@@ -29,6 +31,7 @@ export default function GameRound({
     roundTimeMs,
     onSuccess,
 }) {
+    const {isValid, settings, message} = useSettings();
     const [roundState, setRoundState] = useState(TaskCompletionStates.IDLE);
     const isRoundComplete = [TaskCompletionStates.SUCCESS, TaskCompletionStates.SKIP].includes(roundState);
 
@@ -60,11 +63,14 @@ export default function GameRound({
         // in practice only `roundState` will trigger the effect hook.
     }, [roundState, onSuccess]);
 
-    const annotateOptions = [
-        { value: "banana", label: "Banana" },
-        { value: "apple", label: "Apple" },
-        { value: "orange", label: "Orange" }
-      ];
+    const annotationChoices = settings.annotationField.options.choices
+
+    const annotateOptions = annotationChoices.map (choice =>
+       ({
+           label: choice.name,
+           value: choice.name
+       })
+    );
 
     const [annotationValue, setAnnotationValue] = useState(null);
 

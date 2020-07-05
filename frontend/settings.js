@@ -13,7 +13,7 @@ export const ConfigKeys = Object.freeze({
     TABLE_ID: 'tableId',
     VIEW_ID: 'viewId',
     ATTACHMENT_FIELD_ID: 'attachmentFieldId',
-    NAME_FIELD_ID: 'nameFieldId',
+    ANNOTATION_FIELD_ID: 'nameFieldId',
 });
 
 /**
@@ -21,7 +21,7 @@ export const ConfigKeys = Object.freeze({
  * @property {Table | null} table - The selected table.
  * @property {View  | null} view - The selected view.
  * @property {RecordQueryResult | null} queryResult - The query result that is used to get records from.
- * @property {Field | null} nameField - The name field.
+ * @property {Field | null} annotationField - The annotation field.
  * @property {Field | null} attachmentField - The attachment field.
  */
 
@@ -38,20 +38,24 @@ export function useSettings() {
     // Get all the settings.
     const table = base.getTableByIdIfExists(globalConfig.get(ConfigKeys.TABLE_ID));
     const view = table ? table.getViewByIdIfExists(globalConfig.get(ConfigKeys.VIEW_ID)) : null;
-    const nameField = table
-        ? table.getFieldByIdIfExists(globalConfig.get(ConfigKeys.NAME_FIELD_ID))
+    const annotationField = table
+        ? table.getFieldByIdIfExists(globalConfig.get(ConfigKeys.ANNOTATION_FIELD_ID))
         : null;
     const attachmentField = table
         ? table.getFieldByIdIfExists(globalConfig.get(ConfigKeys.ATTACHMENT_FIELD_ID))
         : null;
 
-    const queryResult = view ? view.selectRecords({fields: [nameField, attachmentField]}) : null;
+    const queryResult = view ? view.selectRecords({fields: [annotationField, attachmentField]}) : null;
 
     // Validate the settings.
-    const isNameFieldValid = nameField && nameField.type === FieldType.SINGLE_LINE_TEXT;
+    const isAnnotationFieldValid = annotationField && annotationField.type === FieldType.SINGLE_SELECT;
+    
+    const labelOptions = annotationField.options.choices
+    
     const isAttachmentFieldValid =
         attachmentField && attachmentField.type === FieldType.MULTIPLE_ATTACHMENTS;
-    const isValid = queryResult && isNameFieldValid && isAttachmentFieldValid;
+    const isValid = queryResult && isAnnotationFieldValid && isAttachmentFieldValid;
+
 
     // Create a validation message if needed.
     let message;
@@ -59,12 +63,12 @@ export function useSettings() {
         message = 'Pick a table';
     } else if (!view) {
         message = 'Pick a view';
-    } else if (!nameField) {
-        message = 'Pick a name field';
-    } else if (!isNameFieldValid) {
-        message = 'The name field should be single line text field';
+    } else if (!annotationField) {
+        message = 'Pick an annotation field';
+    } else if (!isAnnotationFieldValid) {
+        message = 'The annotation field should be single select text field';
     } else if (!attachmentField) {
-        message = 'Pick a attachment field';
+        message = 'Pick an attachment field';
     } else if (!isAttachmentFieldValid) {
         message = 'The profile picture field should be a attachment field ';
     } else {
@@ -78,7 +82,7 @@ export function useSettings() {
             table,
             view,
             queryResult,
-            nameField,
+            annotationField,
             attachmentField,
         },
     };

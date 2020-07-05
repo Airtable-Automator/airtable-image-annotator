@@ -51,11 +51,11 @@ export default function SettingsForm({onDone}) {
                     </FormField>
                 )}
                 {settings.table && (
-                    <FormField label="Name field">
+                    <FormField label="Annotation field">
                         <FieldPickerSynced
                             table={settings.table}
-                            globalConfigKey={ConfigKeys.NAME_FIELD_ID}
-                            allowedTypes={[FieldType.SINGLE_LINE_TEXT]}
+                            globalConfigKey={ConfigKeys.ANNOTATION_FIELD_ID}
+                            allowedTypes={[FieldType.SINGLE_SELECT]}
                         />
                     </FormField>
                 )}

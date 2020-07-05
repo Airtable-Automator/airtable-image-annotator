@@ -4,27 +4,24 @@ import PropTypes from 'prop-types';
 import IdleAnnotationScreen from './IdleAnnotationScreen';
 
 /**
- * The GameCompletedScreen is shown when the user wins or loses the game.
+ * The AnnotationCompletedScreen is shown when the user completes all the annotations.
  */
-export default function GameCompletedScreen({gameReport, onStartAnnotation, onShowSettings}) {
-    const didUserWinTheGame = gameReport.numCompleted === gameReport.numTotal;
+export default function AnnotationCompletedScreen({annotationReport, onStartAnnotation, onShowSettings}) {
     return (
         <IdleAnnotationScreen
-            emoji={didUserWinTheGame ? '🏆' : '💀'}
-            title={didUserWinTheGame ? '🎉 Game completed! 🎉' : '🙁 Game over! 🙁'}
+            emoji={'🏆'}
+            title={'🎉 Annotation Completed! 🎉'}
             text={
-                didUserWinTheGame
-                    ? `Congrats, you recognized all ${gameReport.numTotal} people!`
-                    : `You recognized ${gameReport.numCompleted} out of ${gameReport.numTotal} people`
+                `You completed ${annotationReport.numCompleted} out of ${annotationReport.numTotal} annotations`
             }
-            buttonLabel={didUserWinTheGame ? 'Go again' : 'Try again'}
+            buttonLabel={'Review your annotations'}
             onStartAnnotation={onStartAnnotation}
             onShowSettings={onShowSettings}
         />
     );
 }
 
-GameCompletedScreen.propTypes = {
+AnnotationCompletedScreen.propTypes = {
     annotationReport: PropTypes.shape({
         numCompleted: PropTypes.number.isRequired,
         numTotal: PropTypes.number.isRequired,

@@ -6,11 +6,9 @@ import AnnotationTask from './AnnotationTask';
 import FullScreenBox from './FullScreenBox';
 
 /**
- * The Game component is responsible for the game lifecycle.
+ * The Annotation component is responsible for the annotation lifecycle.
  */
 export default function Annotation({listOfNamesWithPictures, onComplete}) {
-    // We maintain a list of completed people so we know which one to show,
-    // and know when the game is completed.
     const [completed, setCompleted] = useState([]);
 
      // The user picked the right option! Go to the next round or end the game.

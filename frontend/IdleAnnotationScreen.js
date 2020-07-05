@@ -38,8 +38,8 @@ export default function IdleAnnotationScreen({
         isValid && records
             ? getListOfNamesWithPictures({
                   records,
-                  nameField: settings.nameField,
                   attachmentField: settings.attachmentField,
+                  annotationField: settings.annotationField,
               })
             : null;
 
