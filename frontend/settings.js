@@ -50,8 +50,6 @@ export function useSettings() {
     // Validate the settings.
     const isAnnotationFieldValid = annotationField && annotationField.type === FieldType.SINGLE_SELECT;
     
-    const labelOptions = annotationField.options.choices
-    
     const isAttachmentFieldValid =
         attachmentField && attachmentField.type === FieldType.MULTIPLE_ATTACHMENTS;
     const isValid = queryResult && isAnnotationFieldValid && isAttachmentFieldValid;
