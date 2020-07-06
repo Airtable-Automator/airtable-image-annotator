@@ -13,7 +13,7 @@ Image Annotation block allows you to annotate (label) images so that you can tra
 
 ## TODOs
 - [x] Annotation Task - `Skip Record` button should skip the current task 
-- [ ] Annotation Task - Disable `Next Record` button unless the user selects an option
+- [x] Annotation Task - Disable `Next Record` button unless the user selects an option
 - [ ] Settings - Move the labels addition to Settings screen instead of expecting a `SINGLE_SELECT` column in the table
 - [ ] Annotation Completion - Wording in the completion screen and statistics 
 - [ ] Annotation Task - Move the timer duration to Settings screen

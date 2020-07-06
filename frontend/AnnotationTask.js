@@ -73,7 +73,7 @@ export default function AnnotationTask({
     );
 
     const [annotationValue, setAnnotationValue] = useState(null);
-
+    
     function onSelect() {
         setRoundState(TaskCompletionStates.SUCCESS);
     }
@@ -121,7 +121,9 @@ export default function AnnotationTask({
                         <Button variant="danger" size="large" onClick={onTimeEnd}>Skip Record</Button>
                     </Box>
                     <Box paddingRight='10px'>
-                        <Button variant="primary" size="large" onClick={onSelect}>Next Record</Button>
+                        <Button variant="primary" size="large" 
+                            disabled={!annotationValue}
+                            onClick={onSelect}>Next Record</Button>
                     </Box>
                 </Box>
                
