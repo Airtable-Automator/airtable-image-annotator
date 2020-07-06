@@ -30,7 +30,7 @@ const cssString = `
         display: flex;
         flex-wrap: wrap;
         margin: 24px auto 0;
-        max-width: 512px;
+        max-width: 612px;
     }
 
     
@@ -50,7 +50,6 @@ const cssString = `
 
     .Picture {
         margin: 8px;
-        max-height: 240px;
         transition: all 0.12s;
         overflow: hidden;
         cursor: pointer;
