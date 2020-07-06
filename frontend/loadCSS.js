@@ -35,8 +35,8 @@ const cssString = `
 
     
     .PictureGrid-2-options .Picture {
-        width: calc(100% - 0px);
-        height: calc(100% - 0px);
+        width: 100%;
+        height: 100%;
     }
 
     .PictureGrid-4-options {
@@ -55,7 +55,7 @@ const cssString = `
         overflow: hidden;
         cursor: pointer;
         background-size: cover;
-        background-position: center;
+        // background-position: center;
         border-radius: 3px;
     }
 

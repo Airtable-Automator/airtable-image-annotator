@@ -68,7 +68,7 @@ export function useSettings() {
     } else if (!attachmentField) {
         message = 'Pick an attachment field';
     } else if (!isAttachmentFieldValid) {
-        message = 'The profile picture field should be a attachment field ';
+        message = 'The image field should be a attachment field ';
     } else {
         message = null;
     }

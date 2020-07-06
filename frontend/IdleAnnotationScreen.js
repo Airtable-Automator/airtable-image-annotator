@@ -75,8 +75,8 @@ export default function IdleAnnotationScreen({
                 </Button>
                 <Text textColor="light" marginTop={3}>
                     {isValid
-                        ? 'Not enough records with a name and picture'
-                        : 'The settings are not configured completely'}
+                        ? 'Looks like all records are annotated. Add more records to use annotation.'
+                        : 'The settings are not configured completely.'}
                 </Text>
             </React.Fragment>
         );

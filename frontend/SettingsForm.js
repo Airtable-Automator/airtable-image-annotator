@@ -33,7 +33,7 @@ export default function SettingsForm({onDone}) {
                 {settings.table && (
                     <FormField
                         label="View"
-                        description="Only the records visible in this view will be used in the game."
+                        description="Only the records visible in this view will be used for annotation."
                     >
                         <ViewPickerSynced
                             table={settings.table}
@@ -42,7 +42,7 @@ export default function SettingsForm({onDone}) {
                     </FormField>
                 )}
                 {settings.table && (
-                    <FormField label="Attachment field" description="Used for the profile picture.">
+                    <FormField label="Attachment field" description="Used for the image to annotate.">
                         <FieldPickerSynced
                             table={settings.table}
                             globalConfigKey={ConfigKeys.ATTACHMENT_FIELD_ID}
